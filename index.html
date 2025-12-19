@@ -779,6 +779,7 @@
             <li><a onclick="showSection('tecnologia')"><span class="nav-icon">🛠️</span><span>Tecnología</span></a></li>
             <li><a onclick="showSection('cronograma')"><span class="nav-icon">📅</span><span>Cronograma</span></a></li>
             <li><a onclick="showSection('costos')"><span class="nav-icon">💰</span><span>Inversión</span></a></li>
+            <li><a onclick="showSection('soporte')"><span class="nav-icon">🛡️</span><span>Soporte</span></a></li>
             <li><a onclick="showSection('beneficios')"><span class="nav-icon">🎯</span><span>Beneficios</span></a></li>
         </ul>
     </aside>
@@ -811,12 +812,12 @@
                     </div>
                     <div class="stat-card">
                         <div class="icon blue">⏱️</div>
-                        <div class="number">4 min</div>
+                        <div class="number">21 min</div>
                         <div class="label">TMO por solicitud</div>
                     </div>
                     <div class="stat-card">
                         <div class="icon green">⚙️</div>
-                        <div class="number">200 hrs</div>
+                        <div class="number">1,050 hrs</div>
                         <div class="label">Trabajo manual/mes</div>
                     </div>
                     <div class="stat-card">
@@ -838,39 +839,49 @@
                                 <th>Paso</th>
                                 <th>Actividad</th>
                                 <th>Sistema</th>
-                                <th>Tiempo</th>
+                                <th>TMO</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Descarga de layout con solicitudes pendientes</td>
+                                <td>Descarga de solicitudes de reembolso</td>
                                 <td>Salesforce</td>
-                                <td>30 seg</td>
+                                <td>15 min</td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Validación de estado de vuelo, ticket y método de pago</td>
-                                <td>SkySpeed</td>
-                                <td>90 seg</td>
+                                <td>Clasificación de las solicitudes</td>
+                                <td>Manual</td>
+                                <td>1 min</td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Determinación si procede el reembolso</td>
-                                <td>Manual</td>
-                                <td>30 seg</td>
+                                <td>Validación en SkySpeed (vuelo, ticket, método de pago)</td>
+                                <td>SkySpeed</td>
+                                <td>1 min</td>
                             </tr>
                             <tr>
                                 <td>4</td>
-                                <td>Ejecución del reembolso</td>
-                                <td>SkySpeed</td>
-                                <td>60 seg</td>
+                                <td>Dictaminación: procede total o parcialmente</td>
+                                <td>Manual</td>
+                                <td>1 min</td>
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>Actualización del folio como reembolsado</td>
+                                <td>Emisión del reembolso</td>
+                                <td>SkySpeed</td>
+                                <td>1 min</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Actualización del folio y cierre</td>
                                 <td>Salesforce</td>
-                                <td>30 seg</td>
+                                <td>2 min</td>
+                            </tr>
+                            <tr style="background: rgba(99, 102, 241, 0.1);">
+                                <td colspan="3"><strong>Total por solicitud</strong></td>
+                                <td><strong>21 min</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -985,51 +996,74 @@
                     <div class="flow-step">
                         <div class="step-num">1</div>
                         <div class="icon">📥</div>
-                        <h4>Descarga Layout</h4>
+                        <h4>Descarga</h4>
                         <p>Bot descarga solicitudes de Salesforce</p>
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
                         <div class="step-num">2</div>
+                        <div class="icon">📋</div>
+                        <h4>Clasificación</h4>
+                        <p>Categorización automática de solicitudes</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="step-num">3</div>
                         <div class="icon">🔍</div>
                         <h4>Validación</h4>
                         <p>Consulta SkySpeed: vuelo, ticket, pago</p>
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
-                        <div class="step-num">3</div>
-                        <div class="icon">⚖️</div>
-                        <h4>Decisión</h4>
-                        <p>Motor de reglas determina si procede</p>
-                    </div>
-                    <div class="flow-arrow">→</div>
-                    <div class="flow-step">
                         <div class="step-num">4</div>
-                        <div class="icon">💰</div>
-                        <h4>Reembolso</h4>
-                        <p>Ejecución automática en SkySpeed</p>
+                        <div class="icon">⚖️</div>
+                        <h4>Dictaminación</h4>
+                        <p>Genera layout para validación del supervisor</p>
                     </div>
                     <div class="flow-arrow">→</div>
                     <div class="flow-step">
                         <div class="step-num">5</div>
+                        <div class="icon">💰</div>
+                        <h4>Reembolso</h4>
+                        <p>Carga batch en SkySpeed post-aprobación</p>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step">
+                        <div class="step-num">6</div>
                         <div class="icon">✅</div>
                         <h4>Cierre</h4>
-                        <p>Actualiza Salesforce como reembolsado</p>
+                        <p>Actualización de folio en Salesforce</p>
+                    </div>
+                </div>
+
+                <div class="alert warning">
+                    <span class="icon">👤</span>
+                    <div class="alert-content">
+                        <h4>Validación por Supervisor</h4>
+                        <p>El sistema genera un layout con las dictaminaciones propuestas. El supervisor revisa y aprueba antes de la carga batch en SkySpeed para ejecutar los reembolsos.</p>
                     </div>
                 </div>
 
                 <div class="alert info">
                     <span class="icon">📥</span>
                     <div class="alert-content">
-                        <h4>Paso 1: Descarga Masiva de Solicitudes</h4>
+                        <h4>Paso 1: Descarga de Solicitudes</h4>
                         <p>Bot inicia sesión en Salesforce, descarga reporte de folios pendientes y extrae: PNR, datos cliente, monto, motivo y método de pago. Frecuencia configurable.</p>
+                    </div>
+                </div>
+
+                <div class="alert info">
+                    <span class="icon">📋</span>
+                    <div class="alert-content">
+                        <h4>Paso 2: Clasificación de Solicitudes</h4>
+                        <p>El sistema clasifica automáticamente las solicitudes por tipo: urgentes, normales, casos especiales. Agrupa por motivo de reembolso y prioridad.</p>
                     </div>
                 </div>
 
                 <div class="alert info">
                     <span class="icon">🔍</span>
                     <div class="alert-content">
-                        <h4>Paso 2: Validación en SkySpeed</h4>
+                        <h4>Paso 3: Validación en SkySpeed</h4>
                         <p>Bot navega a SkySpeed con el PNR, extrae estado del vuelo, verifica datos del ticket y confirma método de pago original.</p>
                     </div>
                 </div>
@@ -1037,24 +1071,24 @@
                 <div class="alert info">
                     <span class="icon">⚖️</span>
                     <div class="alert-content">
-                        <h4>Paso 3: Determinación Automática</h4>
-                        <p>Motor de reglas evalúa los datos y clasifica: Procede / No Procede / Revisión Humana. Casos ambiguos van a cola de supervisión.</p>
+                        <h4>Paso 4: Dictaminación (Total o Parcial)</h4>
+                        <p>Motor de reglas evalúa los datos y propone dictamen: Procede Total / Procede Parcial / No Procede. <strong>Genera layout para validación del supervisor antes de ejecución.</strong></p>
                     </div>
                 </div>
 
                 <div class="alert info">
                     <span class="icon">💰</span>
                     <div class="alert-content">
-                        <h4>Paso 4: Ejecución del Reembolso</h4>
-                        <p>Si procede, bot ejecuta reembolso en SkySpeed: selecciona ticket, monto correcto, método de pago original y captura número de autorización.</p>
+                        <h4>Paso 5: Ejecución del Reembolso</h4>
+                        <p>Una vez aprobado por el supervisor, el sistema genera archivo batch para carga masiva en SkySpeed. Se ejecutan los reembolsos aprobados.</p>
                     </div>
                 </div>
 
                 <div class="alert success">
                     <span class="icon">✅</span>
                     <div class="alert-content">
-                        <h4>Paso 5: Actualización y Cierre</h4>
-                        <p>Bot regresa a Salesforce, marca folio como "REEMBOLSADO", adjunta evidencia y genera notificación automática al Call Center.</p>
+                        <h4>Paso 6: Actualización del Folio y Cierre</h4>
+                        <p>Bot actualiza Salesforce con el resultado, marca folio como "REEMBOLSADO", adjunta evidencia y genera notificación automática al Call Center.</p>
                     </div>
                 </div>
             </div>
@@ -1286,6 +1320,103 @@
                 </div>
             </div>
 
+            <!-- SOPORTE -->
+            <div id="soporte" class="section">
+                <h2 class="section-title">Soporte Post-Producción</h2>
+
+                <div class="info-card">
+                    <h3>Esquema de Mantenimiento y Mejoras</h3>
+                    <p>Una vez en producción, se ofrece un esquema de soporte para garantizar la continuidad operativa y permitir mejoras evolutivas del sistema.</p>
+                </div>
+
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>🔧 Soporte Backend</h4>
+                        <ul>
+                            <li>Modificación de reglas de negocio</li>
+                            <li>Ajustes en flujos RPA</li>
+                            <li>Corrección de errores</li>
+                            <li>Optimización de procesos</li>
+                            <li>Nuevas integraciones</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h4>🎨 Soporte Frontend</h4>
+                        <ul>
+                            <li>Modificaciones al dashboard</li>
+                            <li>Nuevos reportes y métricas</li>
+                            <li>Ajustes de interfaz de usuario</li>
+                            <li>Nuevas vistas y filtros</li>
+                            <li>Exportación de datos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan de Soporte</th>
+                                <th>Horas/mes</th>
+                                <th>Incluye</th>
+                                <th>Costo Mensual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Básico</strong></td>
+                                <td>8 hrs</td>
+                                <td>Corrección de errores + ajustes menores</td>
+                                <td>$4,000 MXN</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estándar</strong></td>
+                                <td>16 hrs</td>
+                                <td>Básico + modificaciones backend/frontend</td>
+                                <td>$7,500 MXN</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Premium</strong></td>
+                                <td>32 hrs</td>
+                                <td>Estándar + nuevas funcionalidades + prioridad</td>
+                                <td>$14,000 MXN</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert success">
+                    <span class="icon">📋</span>
+                    <div class="alert-content">
+                        <h4>Horas Adicionales</h4>
+                        <p>Las horas que excedan el plan contratado se facturan a <strong>$450 MXN/hora</strong>. Las horas no utilizadas no son acumulables.</p>
+                    </div>
+                </div>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="icon">⚡</div>
+                        <h4>Tiempo de Respuesta</h4>
+                        <ul>
+                            <li>Crítico: 4 horas hábiles</li>
+                            <li>Alto: 8 horas hábiles</li>
+                            <li>Normal: 24 horas hábiles</li>
+                            <li>Bajo: 48 horas hábiles</li>
+                        </ul>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon">📞</div>
+                        <h4>Canales de Soporte</h4>
+                        <ul>
+                            <li>Correo electrónico dedicado</li>
+                            <li>Sistema de tickets</li>
+                            <li>Reuniones semanales de seguimiento</li>
+                            <li>Documentación actualizada</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <!-- BENEFICIOS -->
             <div id="beneficios" class="section">
                 <h2 class="section-title">Beneficios Esperados</h2>
@@ -1303,9 +1434,9 @@
                         <tbody>
                             <tr>
                                 <td>TMO por solicitud</td>
-                                <td>4 minutos</td>
-                                <td>30 seg (auto) / 2 min (revisión)</td>
-                                <td><strong>Hasta -75%</strong></td>
+                                <td>21 minutos</td>
+                                <td>2-3 min (auto) / 5 min (revisión)</td>
+                                <td><strong>Hasta -85%</strong></td>
                             </tr>
                             <tr>
                                 <td>Capacidad de procesamiento</td>
